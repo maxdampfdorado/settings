@@ -6,34 +6,62 @@ registration:
   socialLogins: ["discord", "facebook", "github", "google", "openid"]
 
 endpoints:
-  openAI:
-    models:
-      default: ['gpt-3.5-turbo', 'gpt-4', 'gpt-4-turbo-preview', 'gpt-4-0125-preview', 'gpt-4-1106-preview', 'gpt-3.5-turbo-0125', 'gpt-3.5-turbo-1106', 'gpt-4o', 'gpt-4o-mini', 'gpt-o1', 'gpt-o1-mini']
-    titleConvo: true
-    titleModel: 'gpt-3.5-turbo'
-    fetch: false
-  
-  google:
-    models:
-      default: ['gemini-1.5-pro-preview-0409', 'gemini-1.0-pro-vision-001', 'gemini-pro', 'gemini-pro-vision']
-    titleConvo: true
-    titleModel: 'gemini-pro'
-  
-  deepseek:
-    apiKey: "${DEEPSEEK_API_KEY}"
-    baseURL: "https://api.deepseek.com/v1"
-    models:
-      default: ["deepseek-chat", "deepseek-coder", "deepseek-reasoner"]
-    titleConvo: true
-    titleModel: "deepseek-chat"
-    modelDisplayLabel: "Deepseek"
-  
-  perplexity:
-    apiKey: "${PERPLEXITY_API_KEY}"
-    baseURL: "https://api.perplexity.ai"
-    models:
-      default: ["sonar-small-online", "sonar-medium-online", "sonar-large-online"]
-    titleConvo: true
-    titleModel: "sonar-medium-online"
-    modelDisplayLabel: "Perplexity Sonar"
- 
+  custom:
+    # deepseek
+    # https://platform.deepseek.com/api_keys
+    # Model list: https://platform.deepseek.com/api-docs/pricing
+    - name: "deepseek"
+      apiKey: "${DEEPSEEK_API_KEY}"
+      baseURL: "https://api.deepseek.com"
+      models:
+        default: [
+          "deepseek-chat",
+          "deepseek-coder"
+          ]
+        fetch: false
+      titleConvo: true
+      titleModel: "deepseek-chat"
+      summarize: false
+      summaryModel: "deepseek-chat"
+      forcePrompt: false
+      modelDisplayLabel: "DeepSeek"
+
+    # Preplexity
+    # Model list: https://docs.perplexity.ai/docs/model-cards
+    - name: "Perplexity"
+      apiKey: "${PERPLEXITY_API_KEY}"
+      baseURL: "https://api.perplexity.ai/"
+      models:
+        default: [
+          "llama-3.1-sonar-small-128k-chat",
+          "llama-3.1-sonar-small-128k-online",
+          "llama-3.1-sonar-large-128k-chat",
+          "llama-3.1-sonar-large-128k-online",
+          "llama-3.1-sonar-huge-128k-online",
+          "llama-3.1-8b-instruct",
+          "llama-3.1-70b-instruct"
+          ]
+        fetch: false # fetching list of models is not supported
+      titleConvo: true
+      titleModel: "llama-3.1-sonar-small-128k-chat"
+      summarize: false
+      summaryModel: "llama-3.1-sonar-small-128k-chat"
+      forcePrompt: false
+      dropParams: ["stop", "frequency_penalty"]
+      modelDisplayLabel: "Perplexity"
+
+   
+
+    - name: "xai"
+      apiKey: "${XAI_API_KEY}"
+      baseURL: "https://api.x.ai/v1"
+      models:
+        default: ["grok-beta"]
+        fetch: false
+      titleConvo: true
+      titleMethod: "completion"
+      titleModel: "grok-beta"
+      summarize: false
+      summaryModel: "grok-beta"
+      forcePrompt: false
+      modelDisplayLabel: "Grok"
