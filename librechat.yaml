@@ -11,7 +11,7 @@ endpoints:
   custom:
     # Anyscale
     # # Model list: https://console.anyscale.com/v2/playground
-    - name: "Anyscale
+    - name: "Anyscale"
       enabled: false
       apiKey: "${ANYSCALE_API_KEY}"
       baseURL: "https://api.endpoints.anyscale.com/v1"
